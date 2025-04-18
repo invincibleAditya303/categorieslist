@@ -1,9 +1,9 @@
 import styled from 'styled-components'
 
 export const SideBarContainer = styled.div`
-  height: 90vh;
+  min-height: 100vh;
   width: 20vw;
-  background-color: #1f2854;
+  background-color: #151263;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -18,7 +18,7 @@ export const LinkListContainer = styled.ul`
 
 export const LinkItemContainer = styled.li`
   width: 100%;
-  color: #475569;
+  color: #ffffff;
   display: flex;
   align-items: center;
   list-style-type: none;
@@ -37,13 +37,12 @@ export const ContactUsContainer = styled.div`
   width: 15vw;
   display:  flex;
   flex-direction: column;
-  justify-content: space-between;
   margin-left: 15px;
   margin-bottom: 20px;
 `
 
 export const ContactHeading = styled.p`
-  color: #00306e;
+  color: #ffffff;
   font-size: 18px;
   font-family: "Roboto";
   font-weight: bold;
@@ -55,6 +54,8 @@ export const SocialMediaContainer = styled.ul`
   justify-content: space-between;
   align-items: center;
   padding-left: 0px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 `
 
 export const SocialMediaItem = styled.li`
@@ -67,7 +68,7 @@ export const SocialMediaImage = styled.img`
 `
 
 export const ContactUsText = styled.p`
-  color: #00306e;
+  color: #ffffff;
   font-size: 14px;
   font-family: "Roboto";
 `

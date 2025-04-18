@@ -29,19 +29,21 @@ class Login extends Component {
             body: JSON.stringify(userDetails),
             headers: {
                 'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            }
+                'Accept': 'application/json',
+            },
+            credentials: 'include'
         }
 
         const response = await fetch(url, options)
         console.log(response.ok)
         const data = await response.json()
+        console.log(data)
 
         if (response.ok) {
-            this.onSubmitSuccess(data.jwtToken)
+            this.onSubmitSuccess(data)
         }
         else {
-            this.onSubmitFailure(data.errMsg)
+            this.onSubmitFailure(data)
         }
     }
     
