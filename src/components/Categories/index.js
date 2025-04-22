@@ -4,11 +4,19 @@ import Cookies from 'js-cookie'
 
 import {RingLoader} from 'react-spinners'
 
-import {CategoriesBgContainer, CategoriesContainer,NavbarContainer,WebsiteTitleContainer,WebsiteLogo, WebsiteTitle, LogoutButton, CategoriesHeading, CategoriesListContainer, CategoriesFailureContainer, CategoriesFailureHeading, CategoriesFailureImg, CategoriesFailureText, RetryButton} from './styledComponents'
+import Popup from 'reactjs-popup'
+
+import { IoMdClose } from "react-icons/io"
+
+import {CategoriesBgContainer, CategoriesContainer, CategoriesHeadingContainer, CategoriesHeading, AddCategoryButton, CategoryPopupBgContainer, CloseButton, CategoriesListContainer, CategoriesFailureContainer, CategoriesFailureHeading, CategoriesFailureImg, CategoriesFailureText, RetryButton} from './styledComponents'
 
 import SideBar from '../Sidebar'
 
+import Navbar from '../Navbar'
+
 import CategoryListItem from '../CategoryListItem'
+
+import CategoryPopupContainer from '../CategoryPopup'
 
 const apisStatusConstants = {
     initial: 'INITIAL',
@@ -55,7 +63,7 @@ class Categories extends Component {
         if (response.ok) {
             const data = await response.json()
             const updatedData = data.map(eachCategory => ({
-                id: eachCategory.id,
+                categoryId: eachCategory.category_id,
                 categoryName: eachCategory.category_name,
                 itemCount: eachCategory.item_count,
                 categoryImage: eachCategory.category_image
@@ -86,7 +94,7 @@ class Categories extends Component {
         return (
             <CategoriesListContainer>
                 {categoriesList.map(eachCategory => 
-                    <CategoryListItem categoryDetails={eachCategory} key={eachCategory.id} />
+                    <CategoryListItem categoryDetails={eachCategory} key={eachCategory.categoryId} />
                 )}
             </CategoriesListContainer>
         )
@@ -111,20 +119,37 @@ class Categories extends Component {
 
     render() {
         return (
-            <CategoriesBgContainer>
-                <SideBar />
-                <CategoriesContainer>
-                    <NavbarContainer>
-                        <WebsiteTitleContainer>
-                            <WebsiteLogo src="https://res.cloudinary.com/dtrjr55q7/image/upload/v1744568132/shopping-cart-3d-render-icon_gmd4xd.jpg" alt="website logo" />
-                            <WebsiteTitle>fastcart</WebsiteTitle>
-                        </WebsiteTitleContainer>
-                        <LogoutButton type='button' onClick={this.onClickLogout}>Logout</LogoutButton>
-                    </NavbarContainer>
-                    <CategoriesHeading>Categories</CategoriesHeading>
-                    {this.renderStatusView()}
-                </CategoriesContainer>
-            </CategoriesBgContainer>
+            <>
+                <Navbar onClickLogout={this.onClickLogout} />
+                <CategoriesBgContainer>
+                    <SideBar />
+                    <CategoriesContainer>
+                        <CategoriesHeadingContainer>
+                            <CategoriesHeading>Categories</CategoriesHeading>
+                            <Popup
+                                modal
+                                trigger={
+                                    <AddCategoryButton type='button'>+ Add Category</AddCategoryButton>
+                                }
+                                position='top center'
+                            >
+                                {close => (
+                                    <CategoryPopupBgContainer>
+                                        <CloseButton type='button' onClick={() => close()}>
+                                            <IoMdClose size={30} />
+                                        </CloseButton>
+                                        <CloseButton type='button' onClick={() => close()} ismobile>
+                                            <IoMdClose size={42} />
+                                        </CloseButton>
+                                        <CategoryPopupContainer />
+                                    </CategoryPopupBgContainer>
+                                )}
+                            </Popup>
+                        </CategoriesHeadingContainer>
+                        {this.renderStatusView()}
+                    </CategoriesContainer>
+                </CategoriesBgContainer>
+            </>
         )
     }
 }

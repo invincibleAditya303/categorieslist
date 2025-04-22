@@ -1,9 +1,9 @@
 import { Component } from 'react'
 
-import {RegisterBgContainer, RegisterContainer, InputContainer, LabelHeading, InputText, SubmitButton } from './styledComponents'
+import {RegisterBgContainer, RegisterContainer, RegisterImageContainer, RegisterImage, RegisterFormContainer, InputContainer, LabelHeading, InputText, RegisterButton, RegisterSuccessButton, RegisterErrorButton } from './styledComponents'
 
 class Register extends Component {
-    state = {username: '', name: '', password: '',  gender: ''}
+    state = {username: '', name: '', password: '',  gender: '', showSuccessMsg: false, successMsg: '', showErrMsg: false, errMsg: ''}
 
     onSubmitForm = async event => {
         event.preventDefault()
@@ -23,11 +23,13 @@ class Register extends Component {
         const response = await fetch(apiUrl, options)
 
         if (response.ok) {
-            const result = response.json()
-            console.log(`Success: ${result}`)
-            this.setState({username: '', name: '', password: '',  gender: ''})
+            const successMsg = await response.json()
+
+            this.setState({username: '', name: '', password: '',  gender: '', showSuccessMsg: true, showErrMsg: false, successMsg})
         } else {
-            console.log(`error: ${response.status}`)
+            const errMsg = await response.json()
+
+            this.setState({showErrMsg: true, showSuccessMsg: false, errMsg})
         }
     }
 
@@ -48,27 +50,34 @@ class Register extends Component {
     }
 
     render() {
-        const {username, name, password, gender} = this.state
+        const {username, name, password, gender, showSuccessMsg, successMsg, showErrMsg, errMsg} = this.state
         return (
             <RegisterBgContainer>
-                <RegisterContainer onSubmit={this.onSubmitForm}>
-                    <InputContainer>
-                        <LabelHeading htmlFor='username'>Userame</LabelHeading>
-                        <InputText type="text" placeholder="Enter Username" id="username" value={username} onChange={this.onChangeUsername} />
-                    </InputContainer>
-                    <InputContainer>
-                        <LabelHeading htmlFor='name'>Name</LabelHeading>
-                        <InputText type="text" placeholder="Enter Name" id="name" value={name} onChange={this.onChangeName} />
-                    </InputContainer>
-                    <InputContainer>
-                        <LabelHeading htmlFor='password'>Password</LabelHeading>
-                        <InputText type="text" placeholder="Enter Password" id="password" value={password} onChange={this.onChangePassword} />
-                    </InputContainer>
-                    <InputContainer>
-                        <LabelHeading htmlFor='gender'>Gender</LabelHeading>
-                        <InputText type="text" placeholder="Enter Gender" id="gender" value={gender} onChange={this.onChangeGender} />
-                    </InputContainer>
-                    <SubmitButton type='submit'>Submit</SubmitButton>
+                <RegisterContainer>
+                    <RegisterImageContainer>
+                        <RegisterImage src='https://res.cloudinary.com/dtrjr55q7/image/upload/v1745240119/Mobile-login_1_ztgsll.jpg' alt='register user' />
+                    </RegisterImageContainer>
+                    <RegisterFormContainer onSubmit={this.onSubmitForm}>
+                        <InputContainer>
+                            <LabelHeading htmlFor='username'>Userame</LabelHeading>
+                            <InputText type="text" placeholder="Enter Username" id="username" value={username} onChange={this.onChangeUsername} />
+                        </InputContainer>
+                        <InputContainer>
+                            <LabelHeading htmlFor='name'>Name</LabelHeading>
+                            <InputText type="text" placeholder="Enter Name" id="name" value={name} onChange={this.onChangeName} />
+                        </InputContainer>
+                        <InputContainer>
+                            <LabelHeading htmlFor='password'>Password</LabelHeading>
+                            <InputText type="password" placeholder="Enter Password" id="password" value={password} onChange={this.onChangePassword} />
+                        </InputContainer>
+                        <InputContainer>
+                            <LabelHeading htmlFor='gender'>Gender</LabelHeading>
+                            <InputText type="text" placeholder="Enter Gender" id="gender" value={gender} onChange={this.onChangeGender} />
+                        </InputContainer>
+                        <RegisterButton type='submit'>Register</RegisterButton>
+                        {showSuccessMsg && <RegisterSuccessButton>{successMsg}</RegisterSuccessButton>}
+                        {showErrMsg && <RegisterErrorButton>{errMsg}</RegisterErrorButton>}
+                    </RegisterFormContainer>
                 </RegisterContainer>
             </RegisterBgContainer>
         )

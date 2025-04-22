@@ -1,12 +1,16 @@
 import styled from 'styled-components'
 
 export const SideBarContainer = styled.div`
-  min-height: 100vh;
+  min-height: 90vh;
   width: 20vw;
   background-color: #151263;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+  @media (width < 776px) {
+    display: none;
+  }
 `
 
 export const LinkListContainer = styled.ul`

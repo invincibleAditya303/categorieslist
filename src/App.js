@@ -5,6 +5,7 @@ import Register from './components/Register';
 import ProtectedRoute from './components/ProtectedRoute'
 import './App.css';
 import Categories from './components/Categories';
+import CategoryItemUpdate from './components/CategoryItemUpdate';
 
 const App = () => (
   <BrowserRouter>
@@ -12,6 +13,7 @@ const App = () => (
       <Route exact path='/login' component={Login} />
       <Route exact path='/register' component={Register} />
       <ProtectedRoute exact path='/categories' component={Categories} />
+      <ProtectedRoute exact path='/categories/:categoryId' component={CategoryItemUpdate} />
     </Switch>
   </BrowserRouter>
 )

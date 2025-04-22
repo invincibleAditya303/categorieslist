@@ -25,6 +25,10 @@ export const LoginImageContainer = styled.div`
 export const LoginImage = styled.img`
   height: 100%;
   width: 75%;
+
+  @media (width < 776px) {
+    width: 100%;
+  }
 `
 
 export const LoginFormContainer = styled.form`
@@ -40,6 +44,10 @@ export const LoginHeading = styled.h1`
   font-size: 36px;
   font-family: "Roboto";
   font-weight: bold;
+
+  @media (width < 776px) {
+    font-size: 14px;
+  }
 `
 
 export const InputContainer = styled.div`
@@ -54,6 +62,10 @@ export const LabelHeading = styled.label`
   font-size: 18px;
   font-family: "Roboto";
   padding-bottom: 5px;
+
+  @media (width < 776px) {
+    font-size: 12px;
+  }
 `
 
 export const InputText = styled.input`
@@ -67,6 +79,10 @@ export const InputText = styled.input`
   border-radius: 8px;
   border: 2px #cbd5e1 solid;
   outline: none;
+
+  @media (width < 776px) {
+    font-size: 12px;
+  }
 `
 
 export const LoginButton = styled.button`
@@ -83,10 +99,20 @@ export const LoginButton = styled.button`
   border-width: 0px;
   cursor: pointer;
   outline: none;
+
+  @media (width < 776px) {
+    width: 9vw;  
+    font-size: 10px;
+    padding: 3px;
+  }
 `
 
 export const ErrorMsg = styled.p`
   color: #ff0b37;
   font-size: 18px;
   font-family: "Roboto";
+
+  @media (width < 776px) {
+    font-size: 12px;
+  }
 `
