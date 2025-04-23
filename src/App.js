@@ -6,6 +6,7 @@ import ProtectedRoute from './components/ProtectedRoute'
 import './App.css';
 import Categories from './components/Categories';
 import CategoryItemUpdate from './components/CategoryItemUpdate';
+import NotFound from './components/NotFound';
 
 const App = () => (
   <BrowserRouter>
@@ -14,6 +15,7 @@ const App = () => (
       <Route exact path='/register' component={Register} />
       <ProtectedRoute exact path='/categories' component={Categories} />
       <ProtectedRoute exact path='/categories/:categoryId' component={CategoryItemUpdate} />
+      <Route component={NotFound} />
     </Switch>
   </BrowserRouter>
 )
