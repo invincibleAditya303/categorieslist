@@ -17,7 +17,8 @@ class CategoryPopup extends Component {
         formData.append('categoryImage', categoryImage)
         
         const jwtToken = Cookies.get('userDetails')
-        const apiUrl = 'https://categorymanagement-e3c554d18fdf.herokuapp.com/categories'
+        const apiUrl = process.env.REACT_APP_API_URL
+        const addCategoryUrl = `${apiUrl}/categories`
         const options = {
             method: 'POST',
             body: formData,
@@ -26,7 +27,7 @@ class CategoryPopup extends Component {
             },
         }
 
-        const response = await fetch(apiUrl, options)
+        const response = await fetch(addCategoryUrl, options)
         console.log(response)
 
         if (response.ok) {

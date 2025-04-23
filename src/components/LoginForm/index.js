@@ -23,7 +23,8 @@ class Login extends Component {
         event.preventDefault()
         const {username, password} = this.state
         const userDetails = {username, password}
-        const url='https://categorymanagement-e3c554d18fdf.herokuapp.com/login'
+        const apiUrl = process.env.REACT_APP_API_URL
+        const loginUrl=`${apiUrl}/login`
         const options = {
             method: 'POST',
             body: JSON.stringify(userDetails),
@@ -34,7 +35,7 @@ class Login extends Component {
             credentials: 'include'
         }
 
-        const response = await fetch(url, options)
+        const response = await fetch(loginUrl, options)
         console.log(response.ok)
         const data = await response.json()
         console.log(data)

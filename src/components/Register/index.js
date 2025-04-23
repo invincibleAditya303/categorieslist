@@ -11,7 +11,8 @@ class Register extends Component {
         const {username, name, password, gender} = this.state
         const newProfile = {username, name, password, gender}
         
-        const apiUrl = 'https://categorymanagement-e3c554d18fdf.herokuapp.com/register'
+        const apiUrl = process.env.REACT_APP_API_URL
+        const registerUrl = `${apiUrl}/register`
         const options = {
             method: 'POST',
             headers: {
@@ -20,7 +21,7 @@ class Register extends Component {
             body: JSON.stringify(newProfile),
         }
 
-        const response = await fetch(apiUrl, options)
+        const response = await fetch(registerUrl, options)
 
         if (response.ok) {
             const successMsg = await response.json()

@@ -35,7 +35,8 @@ class CategoryItemUpdate extends Component {
         const {match} = this.props
         const {params} = match
         const {categoryId} = params
-        const apiUrl = `https://categorymanagement-e3c554d18fdf.herokuapp.com/categories/${categoryId}`
+        const apiUrl = process.env.REACT_APP_API_URL
+        const editCategoryUrl = `${apiUrl}/categories/${categoryId}`
         const options  = {
             method: 'PUT',
             body: formData,
@@ -44,7 +45,7 @@ class CategoryItemUpdate extends Component {
             }
         }
         
-        const response = await fetch(apiUrl, options)
+        const response = await fetch(editCategoryUrl, options)
         console.log(response)
         const msg = await response.json()
 

@@ -46,7 +46,8 @@ class Categories extends Component {
     getCategoriesList = async () => {
         this.setState({apiStatus: apisStatusConstants.inProgress})
 
-        const apiUrl = 'https://categorymanagement-e3c554d18fdf.herokuapp.com/categories'
+        const apiUrl = process.env.REACT_APP_API_URL
+        const categoriesUrl = `${apiUrl}/categories`
         const jwtToken = Cookies.get('userDetails')
         const options = {
             method: 'GET',
@@ -55,7 +56,7 @@ class Categories extends Component {
               },
             credentials: 'include',
         }
-        const response = await fetch(apiUrl, options)
+        const response = await fetch(categoriesUrl, options)
 
         console.log(response)
         console.log(response.ok)
